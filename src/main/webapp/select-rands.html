@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+
+
+</div>
+<script src="js/vue.js"></script>
+<script src="js/axios1.7.2.js"></script>
+
+<script>
+  new Vue({
+    el:"#app",
+    data(){
+      return
+    },
+    mounted(){
+    //  页面加载完成，发送异步请求
+      axios({
+        methods:"get",
+        url:"http://localhost:8080/vue-demo/selectAllServlet"
+      }).then(function (resp){
+      //    判断是否为succeed
+          if(resp.data == "succeed"){
+              location.href="http://localhost:8080/vue-demo/brand.html"
+          }
+
+      })
+
+    }
+  })
+</script>
+</body>
+</html>

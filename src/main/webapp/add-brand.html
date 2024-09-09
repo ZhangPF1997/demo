@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <h3>添加品牌</h3>
+    <form action="" method="post">
+      品牌名称：<input id="brandName" v-model="brand.brandName" name="brandName"><br>
+      企业名称：<input id="companyName" v-model="brand.companyName" name="companyName"><br>
+      排序：<input id="ordered" v-model="brand.ordered" name="ordered"><br>
+      描述信息：<textarea rows="5" cols="20" v-model="brand.description" id="description"></textarea><br>
+      状态：
+      <input type="radio" name="status" v-model="brand.status" value="0">禁用
+      <input type="radio" name="status" v-model="brand.status" value="1">启用
+      <input type="button" id="btn" @click="submitForm" value="提交">
+
+    </form>
+</div>
+
+<script src="js/vue.js"></script>
+<script src="js/axios1.7.2.js"></script>
+
+<script>
+  new Vue({
+    el:"#app",
+    data(){
+      return{
+        brand:{}
+      }},
+
+    methods:{
+      submitForm(){
+      //  发送Ajax请求
+        //  页面加载完成，发送异步请求  axios 中的this为Windows对象，所有要扩展Vue的this
+        var _this = this;
+        axios({
+          methods:"get",
+          url:"http://localhost:8080/vue-demo/selectAllServlet",
+          data:this.brand
+        }).then(function (resp){
+          //    判断是否为succeed
+          if(resp.data == "succeed"){
+            location.href="http://localhost:8080/vue-demo/brand.html"
+          }
+
+      })
+    }
+
+  }})
+</script>
+
+</body>
+</html>
